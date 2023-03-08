@@ -1,0 +1,124 @@
+<Container>:
+    orientation: 'vertical'
+    contain: contain
+    action_button: action_button
+    app_bar: app_bar
+
+    MDFloatLayout:
+        orientation: "vertical"
+        MDTopAppBar:
+            size_hint: 1, 0.20
+            pos_hint: {'x': 0, 'y': 0.80}
+            title: "Заметки"
+            font_name_helper_text: "arial"
+
+
+        MDBoxLayout:
+            id: contain
+            orientation: 'vertical'
+            size_hint: 1, 0.78
+            pos_hint: {'x': 0, 'y': 0.11}
+            canvas.before:
+                Color:
+                    rgba: 255, 255, 255, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [20,]
+                  
+        BoxLayout:
+            id: app_bar
+            MDBottomAppBar:
+                MDTopAppBar:
+                    id: action_button
+                    icon :"plus"
+                    type: "bottom"
+                    text: "plus"
+                    on_action_button: root.change_icon_action_button()
+
+<ShowAllNotes>:
+    list_notes: list_notes
+    text_field: text_field
+    button_magnify: button_magnify
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 20
+        FloatLayout:
+            size_hint: 0.9, 0.08
+            pos_hint: {"center_x": .5, "center_y": .06}
+            MDTextField:
+                id: text_field
+                hint_text: "Поиск"
+                pos_hint: {"center_x": .5, "center_y": .06}
+            MDIconButton:
+                id: button_magnify
+                icon: "magnify"
+                pos_hint: {"x": .85, "y": -.4}
+                theme_text_color: "Hint"
+        
+        MDScrollView:
+            size_hint: 0.9, 1
+            pos_hint: {"center_x": .5}
+            text_size: self.size
+            MDList:
+                id: list_notes
+                text_size: self.size
+
+<ShowNote>:
+    title: title
+    description: description
+    datetime: datetime
+    padding: 20
+    
+    MDLabel:
+        id: title
+        text: "Заголовок:  "
+        size_hint: 1, 0.1
+        pos_hint: {"center_x": .5}
+        halign: "center"
+        font_size: 30 
+    MDLabel:
+        id: description
+        text: "Описание заметки:  "
+        size_hint: 1, 0.1
+    MDLabel:
+        id: datetime
+        text: ""
+        size_hint: 1, 0.1
+    BoxLayout:
+        size_hint: 1, 0.2
+
+
+<ChangeNote>:
+    title: title
+    description: description
+    datetime: datetime
+    padding: 20
+    size_hint: 1, 1
+    spacing: 20
+
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 0.25
+        MDLabel:
+            text: "Заголовок:"
+        MDTextField:
+            id: title
+            helper_text: "Поле не должно быть пустым"
+            helper_text_mode: "persistent"
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 0.25
+        MDLabel:
+            text: "Описание заметки:"
+        MDTextField:
+            multiline: True
+            id: description
+            helper_text: "Поле не должно быть пустым"
+            helper_text_mode: "persistent"
+    BoxLayout:
+        orientation: "vertical"
+        size_hint: 1, 0.5
+        MDLabel:
+            id: datetime
+
